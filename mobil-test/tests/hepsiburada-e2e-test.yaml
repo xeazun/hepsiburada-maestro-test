@@ -1,0 +1,16 @@
+appId: com.pozitron.hepsiburada
+---
+- launchApp:
+    clearState: true
+
+- runFlow: ../screens/home.yaml
+
+- runFlow: ../screens/search.yaml
+
+- runFlow: ../screens/filter.yaml
+
+- runFlow: ../screens/search-results.yaml
+
+- runFlow: ../screens/product-detail.yaml
+
+- runFlow: ../screens/cart.yaml

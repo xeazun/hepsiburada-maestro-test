@@ -1,0 +1,118 @@
+# ==============================================================================
+# TEST CASE: Ürün Filtreleme ve Doğrulama
+# ==============================================================================
+# Adım 4: Filtreler alanına girilir
+# Adım 5: Aşağıdaki filtreler uygulanır:
+#         - Cinsiyet: Erkek
+#         - Renk: Beyaz
+#         - Numara: 42
+#         - Fiyat Aralığı: 3.000 TL – 5.000 TL
+# Adım 6: Filtrelerin doğru şekilde uygulandığı ve sonuçların güncellendiği doğrulanır
+#
+# Preconditions:
+# - Arama sonuçları sayfası yüklenmiş
+# - Filtre butonu görünür
+#
+# Expected Results:
+# - Tüm filtreler başarıyla uygulanır
+# - Seçili filtreler işaretli olarak görünür
+# - Ürün listesi filtrelere göre güncellenir
+# ==============================================================================
+
+appId: com.pozitron.hepsiburada
+---
+
+# ADIM 4: Filtreler Alanına Giriş
+
+- waitForAnimationToEnd
+- tapOn:
+    point: 4%,12%
+    
+- assertVisible: Filtrele
+
+# ADIM 5: Filtreleri Uygulama
+#Numara:42
+- tapOn: Beden
+- tapOn:
+    id: search
+- inputText: "42"
+- tapOn:
+    text: "42"
+    index: 1
+- tapOn:
+    id: btnApply
+  
+#Fiyat Aralığı: 3.000 TL – 5.000 TL
+- tapOn: Fiyat Aralığı
+- tapOn:
+    id: clMinPrice
+- inputText: "3000"
+- tapOn:
+    id: clMaxPrice
+- inputText: "5000"
+- tapOn:
+    id: input_method_nav_back
+- tapOn:
+    id: btnApply
+
+- scrollUntilVisible:
+    element:
+      text: "Renk"
+    direction: DOWN
+    timeout: 10000
+
+#Cinsiyet: Erkek
+- tapOn: Cinsiyet
+- tapOn:
+    id: rootLayout
+    index: 1
+- tapOn:
+    id: btnApply
+
+#Renk: Beyaz
+- tapOn: Renk
+- tapOn: Beyaz
+
+- tapOn:- swipe:
+    from:
+      text: adidas
+    direction: UP
+
+    id: btnApply
+    
+#Filtreyi Uygula
+- tapOn:
+    id: btnApply
+    
+- waitForAnimationToEnd
+
+# ADIM 6: Filtrelerin Doğrulanması
+
+- tapOn: "5"
+
+- assertVisible: |-
+    adidas
+    Seçili
+- assertVisible: |-
+    42
+    Seçili
+- assertVisible: |-
+    3000 - 5000 TL
+    Seçili
+
+- scrollUntilVisible:
+    element:
+      text: "Renk"
+    direction: DOWN
+    timeout: 10000
+
+- assertVisible: |-
+    Erkek
+    Seçili
+
+- assertVisible: |-
+    Beyaz
+    Seçili
+    
+- tapOn:
+    id: btnApply

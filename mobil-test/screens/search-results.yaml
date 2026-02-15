@@ -1,0 +1,39 @@
+# ==============================================================================
+# TEST: Ürün Listesi Validasyonu
+# ==============================================================================
+# Adım 7: Listelenen ürünlerin seçilen filtre kriterlerine uygun olduğu kontrol edilir
+#
+# Beklenen Sonuçlar:
+# - Sadece Adidas ürünleri görünür
+# - Fiyatlar 3000-5000 TL aralığında
+# - Erkek ürünleri listelenir
+# - Beyaz renk ürünler gösterilir
+# ==============================================================================
+appId: com.pozitron.hepsiburada
+---
+
+- waitForAnimationToEnd
+
+#MARKA HAPPY-NEGATİVE
+- assertVisible:
+    text: ".*[Aa]didas.*"
+- assertNotVisible:
+    text: ".*[Nn]ike.*"
+
+#FİYAT HAPPY-NEGATİVE
+- assertVisible:
+    text: ".*[3-5]\\.[0-9]{3}.*TL"
+#- assertNotVisible:
+#    text: ".*2\\.[0-9]{3}.*TL" 
+
+#CINSIYET HAPPY-NEGATİVE
+- assertVisible:
+    text: ".*[Ee]rkek.*"
+- assertNotVisible:
+    text: ".*[Kk]adın.*"    
+
+#RENK HAPPY-NEGATİVE
+- assertVisible:
+    text: ".*[Bb]eyaz.*"
+- assertNotVisible:
+    text: ".*[Ss]iyah.*"    

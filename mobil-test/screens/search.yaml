@@ -1,0 +1,36 @@
+# ==============================================================================
+# TEST: Arama ve Ürün Listeleme Doğrulaması
+# ==============================================================================
+# Adım 2: Arama alanına "Adidas ayakkabı" yazılır ve arama yapılır
+# Adım 3: Ürün listeleme sayfasının başarılı şekilde açıldığı doğrulanır
+#
+# Beklenen Sonuçlar:
+# - Arama sonuçları yüklenir
+# - Filtre butonu görünür
+# - En az 1 ürün gösterilir
+# ==============================================================================
+
+
+appId: com.pozitron.hepsiburada
+---
+# ADIM 2: Arama İşlemi
+
+- tapOn:
+    id: searchTextField
+
+- inputText: "Adidas ayakkabi"
+
+- tapOn:
+    point: 91%,90%
+
+# ADIM 3: Listeleme sayfası doğrulaması
+
+- assertVisible:
+    index: 0
+
+- assertVisible:
+    text: ".*TL.*"
+
+- assertVisible:
+    text: ".*[Aa]didas.*"
+

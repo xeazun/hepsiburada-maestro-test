@@ -1,0 +1,28 @@
+# ==============================================================================
+# TEST CASE: Sepet Doğrulaması
+# ==============================================================================
+# Adım 10: Kullanıcı login olmadan sepete yönlendirilir
+# Adım 11: Sepet sayfasında:
+#          - Eklenen ürünün sepette yer aldığı
+#          - Ürün adının, fiyatının ve temel bilgilerinin görüntülendiği doğrulanır
+#
+# Preconditions:
+# - Ürün detay sayfasından "Sepete Ekle" butonuna tıklanmış
+# - Login olmadan devam et seçeneği seçilmiş
+#
+# Expected Results:
+# - Sepet sayfası başarıyla açılır
+# - Eklenen ürün sepette görünür
+# - Ürün adı, fiyat ve temel bilgiler doğru şekilde gösterilir
+# - Sepet sayısı doğru gösterilir (1 ürün)
+# ==============================================================================
+
+appId: com.pozitron.hepsiburada
+---
+
+# ADIM 10-11: Sepet Doğrulaması
+
+- assertVisible: Sepetim (1 ürün)
+- assertVisible: Adidas Strutter Erkek Günlük Spor Ayakkabı
+- assertVisible: 3.183,03 TL
+- assertVisible: Ürün seçili
