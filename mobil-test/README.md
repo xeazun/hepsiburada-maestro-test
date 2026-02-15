@@ -171,21 +171,3 @@ Test tamamlandığında:
 3. Commit yapın (`git commit -m 'Yeni özellik eklendi'`)
 4. Push yapın (`git push origin feature/yeni-ozellik`)
 5. Pull Request açın
-
-## 📄 Lisans
-
-Bu proje eğitim amaçlıdır.
-
-## 👤 Geliştirici
-
-**Ezgi Aslan**
-- GitHub: [@xeaslan]
-- Proje: Teedo Yazılım Test ve Kalite Eğitimi
-
-## 📞 İletişim
-
-Sorularınız için issue açabilirsiniz.
-
----
-
-⭐ Beğendiyseniz yıldız vermeyi unutmayın!
