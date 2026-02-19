@@ -1,43 +1,37 @@
-# ==============================================================================
-# TEST: Ürün Seçimi ve Sepete Ekleme
-# ==============================================================================
-# Adım 7 (devam): Ürün detayında filtre kriterlerinin kontrolü
-# Adım 8: Listeleme ekranında yer alan ürünlerden herhangi biri seçilir
-# Adım 9: Ürün detay sayfasında "Sepete Ekle" butonuna tıklanır
-#
-# Beklenen Sonuçlar:
-# - Ürün detay sayfası açılır
-# - Ürün bilgileri filtre kriterlerine uygun
-# - "Sepete eklendi" mesajı görünür
-# ==============================================================================
-
 appId: com.pozitron.hepsiburada
 ---
-
-# ADIM 8: Ürün Seçimi
-
+# Listeden ilk ürüne koordinatla tıklandı. Ürün kartlarının ID'si yok, koordinat kullanıldı.
 - tapOn:
     point: 3%,17%
 
-# ADIM 7 (devam): Ürün Detayında Filtre Kontrolü
+# Ürün detayında filtre kriterlerine uygunluğu kontrol edildi.
+# Regex kullanıldı çünkü büyük/küçük harf farklılıkları olabiliyor.
+
+# Marka kontrolü. Adidas mı?
 - assertVisible:
     text: ".*[Aa]didas.*"
 
+# Fiyat 3000-5000 TL aralığında mı kontrol edildi.
 - assertVisible:
     text: ".*[3-5]\\.[0-9]{3}.*TL"
 
+# Cinsiyet Erkek mi?
 - assertVisible:
     text: ".*[Ee]rkek.*"
-   
-- assertVisible:
-    text: ".*[Bb]eyaz.*" 
 
+# Renk Beyaz mı?
+- assertVisible:
+    text: ".*[Bb]eyaz.*"
+
+# Numara 42 mi? Tam text kontrolü yapıldı.
 - assertVisible:
     text: "Ayakkabı Numarası: 42"
 
-# ADIM 9 Sepete ekleme
+# Sepete ekle butonuna tıklandı.
 - tapOn: Sepete ekle
 
+# Sepete eklendi mesajı görünüyor mu kontrol edildi.
 - assertVisible: Adidas Strutter Erkek Günlük Spor AyakkabıSepete eklendi
 
+# Sepete git butonuna tıkladık, sepet sayfasına geçildi.
 - tapOn: Sepete git

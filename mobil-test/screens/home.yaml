@@ -1,22 +1,8 @@
-# ==============================================================================
-# TEST CASE: Hepsiburada Ana Sayfa Kontrolü
-# ==============================================================================
-# Adım 1: Hepsiburada ana sayfası açılır ve yüklendiği doğrulanır
-#
-# Preconditions:
-# - Uygulama temiz state ile başlatılmış
-#
-# Expected Results:
-# - Ana sayfa başarıyla yüklenir
-# - Ana sayfa elementleri görünür
-# - Animasyonlar tamamlanır
-# ==============================================================================
-
-# ADIM 1: Ana Sayfa Kontrolü
-
 appId: com.pozitron.hepsiburada
 ---
+# Herhangi bir element görünüyor mu kontrol ettik. Ana sayfa yüklendi mi diye.
 - assertVisible:
     id: ".*"
-    
+
+# Sayfa animasyonlarının bitmesini beklenildi. Yoksa arama kutusuna tıklanamaz.
 - waitForAnimationToEnd

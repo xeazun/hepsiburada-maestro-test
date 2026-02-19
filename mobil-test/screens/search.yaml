@@ -1,36 +1,24 @@
-# ==============================================================================
-# TEST: Arama ve Ürün Listeleme Doğrulaması
-# ==============================================================================
-# Adım 2: Arama alanına "Adidas ayakkabı" yazılır ve arama yapılır
-# Adım 3: Ürün listeleme sayfasının başarılı şekilde açıldığı doğrulanır
-#
-# Beklenen Sonuçlar:
-# - Arama sonuçları yüklenir
-# - Filtre butonu görünür
-# - En az 1 ürün gösterilir
-# ==============================================================================
-
-
 appId: com.pozitron.hepsiburada
 ---
-# ADIM 2: Arama İşlemi
-
+# Arama kutusuna tıklanıldı.
 - tapOn:
     id: searchTextField
 
+# "Adidas ayakkabi" yazdık. Maestro Türkçe karakter desteklemiyor, "ı" yerine "i" kullanıldı.
 - inputText: "Adidas ayakkabi"
 
+# Sağ alttaki arama butonuna koordinatla tıklandı. ID yok, koordinat kullanıldı.
 - tapOn:
     point: 91%,90%
 
-# ADIM 3: Listeleme sayfası doğrulaması
-
+# Sayfa yüklendi mi kontrol edildi. İlk element görünüyor mu?
 - assertVisible:
     index: 0
 
+# Fiyat bilgisi var mı? TL yazısı görünüyorsa ürünler yüklenmiş demektir.
 - assertVisible:
     text: ".*TL.*"
 
+# Adidas ürünleri listelendi mi kontrol eidldi.
 - assertVisible:
     text: ".*[Aa]didas.*"
-

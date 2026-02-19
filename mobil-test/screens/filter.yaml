@@ -1,37 +1,17 @@
-# ==============================================================================
-# TEST CASE: Ürün Filtreleme ve Doğrulama
-# ==============================================================================
-# Adım 4: Filtreler alanına girilir
-# Adım 5: Aşağıdaki filtreler uygulanır:
-#         - Cinsiyet: Erkek
-#         - Renk: Beyaz
-#         - Numara: 42
-#         - Fiyat Aralığı: 3.000 TL – 5.000 TL
-# Adım 6: Filtrelerin doğru şekilde uygulandığı ve sonuçların güncellendiği doğrulanır
-#
-# Preconditions:
-# - Arama sonuçları sayfası yüklenmiş
-# - Filtre butonu görünür
-#
-# Expected Results:
-# - Tüm filtreler başarıyla uygulanır
-# - Seçili filtreler işaretli olarak görünür
-# - Ürün listesi filtrelere göre güncellenir
-# ==============================================================================
-
 appId: com.pozitron.hepsiburada
 ---
-
-# ADIM 4: Filtreler Alanına Giriş
-
+# Sayfa animasyonlarının bitmesini bekledik. Filtreye tıklamadan önce yüklenmesi lazım.
 - waitForAnimationToEnd
+
+# Sol üstteki filtre ikonuna koordinatla tıkladık. ID yok, koordinat kullanıldı.
 - tapOn:
     point: 4%,12%
-    
+
+# Filtre sayfası açıldı mı kontrol edildi.
 - assertVisible: Filtrele
 
-# ADIM 5: Filtreleri Uygulama
-#Numara:42
+# Beden filtresini uygulandı (42).
+# Arama kutusunu kullandık çünkü liste uzun, scroll yapmaktansa aramak daha hızlı.
 - tapOn: Beden
 - tapOn:
     id: search
@@ -41,8 +21,9 @@ appId: com.pozitron.hepsiburada
     index: 1
 - tapOn:
     id: btnApply
-  
-#Fiyat Aralığı: 3.000 TL – 5.000 TL
+
+# Fiyat aralığı filtresini uygulandı(3000-5000 TL).
+# Min ve max input'lara değerler girildi.
 - tapOn: Fiyat Aralığı
 - tapOn:
     id: clMinPrice
@@ -50,18 +31,15 @@ appId: com.pozitron.hepsiburada
 - tapOn:
     id: clMaxPrice
 - inputText: "5000"
+
+# Klavyeyi kapattık, yoksa ekranı kapatıyor.
 - tapOn:
     id: input_method_nav_back
 - tapOn:
     id: btnApply
 
-- scrollUntilVisible:
-    element:
-      text: "Renk"
-    direction: DOWN
-    timeout: 10000
-
-#Cinsiyet: Erkek
+# Cinsiyet filtresini uygulandı.
+# rootLayout index:1 kullanıldı çünkü ikinci eleman Erkek seçeneği.
 - tapOn: Cinsiyet
 - tapOn:
     id: rootLayout
@@ -69,27 +47,31 @@ appId: com.pozitron.hepsiburada
 - tapOn:
     id: btnApply
 
-#Renk: Beyaz
+# Renk filtresi aşağıda, scroll yapıp bulundu.
+- scrollUntilVisible:
+    element:
+      text: "Renk"
+    direction: DOWN
+    timeout: 10000
+
+# Renk filtresini uygulandı.
 - tapOn: Renk
 - tapOn: Beyaz
-
-- tapOn:- swipe:
-    from:
-      text: adidas
-    direction: UP
-
-    id: btnApply
-    
-#Filtreyi Uygula
 - tapOn:
     id: btnApply
-    
+
+# Tüm filtreleri uygulandı, ana sayfaya dönüldü.
+- tapOn:
+    id: btnApply
+
 - waitForAnimationToEnd
 
-# ADIM 6: Filtrelerin Doğrulanması
-
+# Filtrelerin uygulandığını doğrulamak için filtre butonuna tekrar tıklandı.
+# "5" = uygulanan filtre sayısı (marka, beden, fiyat, cinsiyet, renk).
 - tapOn: "5"
 
+# Seçili filtrelerin işaretli olduğunu kontrol edildi.
+# Eğer seçili değilse filtreler uygulanmamış demektir.
 - assertVisible: |-
     adidas
     Seçili
@@ -100,6 +82,7 @@ appId: com.pozitron.hepsiburada
     3000 - 5000 TL
     Seçili
 
+# Cinsiyet ve Renk aşağıda, scroll yapıldı.
 - scrollUntilVisible:
     element:
       text: "Renk"
@@ -109,10 +92,10 @@ appId: com.pozitron.hepsiburada
 - assertVisible: |-
     Erkek
     Seçili
-
 - assertVisible: |-
     Beyaz
     Seçili
-    
+
+# Filtre sayfasını kapattık, ürün listesine dönüldü.
 - tapOn:
     id: btnApply
